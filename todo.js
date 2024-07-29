@@ -17,9 +17,14 @@ function onClickCreateTask() {
     deleteBtn.textContent = "Delete";
     deleteBtn.addEventListener("click", onClickDelete);
 
+    let editBtn = document.createElement("button");
+    editBtn.textContent = "Edit";
+    editBtn.addEventListener("click", onClickEdit);
+
     listElement.appendChild(completeBtn);
     listElement.appendChild(deleteBtn);
     taskList.appendChild(listElement);
+    listElement.appendChild(editBtn);
 
     inputTask.value = "";
   } else {
@@ -44,5 +49,16 @@ function onClickComplete(event) {
 function onClickDelete(event) {
   let listElement = event.target.parentElement;
   let taskList = listElement.parentElement;
+  taskList.removeChild(listElement);
+}
+
+function onClickEdit(event) {
+  listElement = event.target.parentElement;
+  let spanElement = listElement.querySelector("span");
+  // inputTask.value = spanElement.textContent;
+  // taskList.removeChild(listElement);
+
+  inputTask.value = spanElement.textContent;
+  editBtn.textContent = inputTask.value;
   taskList.removeChild(listElement);
 }
