@@ -1,6 +1,16 @@
 let btn = document.getElementById("addTaskBtn");
 let inputTask = document.getElementById("newTask");
 let taskList = document.getElementById("taskList");
+let editedElement = null;
+
+function editElement() {
+  if (inputTask != "") {
+    if (editedElement) {
+      editedElement.querySelector("span").textContent = inputTask.value;
+      editedElement = null;
+    }
+  }
+}
 
 function onClickCreateTask() {
   if (inputTask.value != "") {
@@ -53,12 +63,12 @@ function onClickDelete(event) {
 }
 
 function onClickEdit(event) {
-  listElement = event.target.parentElement;
-  let spanElement = listElement.querySelector("span");
+  editedElement = event.target.parentElement;
+  // let spanElement = listElement.querySelector("span");
   // inputTask.value = spanElement.textContent;
   // taskList.removeChild(listElement);
 
-  inputTask.value = spanElement.textContent;
-  editBtn.textContent = inputTask.value;
-  taskList.removeChild(listElement);
+  inputTask.value = editedElement.querySelector("span").textContent;
+  // editBtn.textContent = inputTask.value;
+  taskList.removeChild(editedElement);
 }
